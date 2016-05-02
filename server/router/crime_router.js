@@ -3,30 +3,8 @@ const Crime = require(__dirname + '/../../model/crime');
 const bpj = require('body-parser').json();
 const eH = require(__dirname + '/../lib/error_handler');
 const request = require('superagent');
-// var mongojs = require('mongojs');
-// var db = mongojs('mocklist', ['mocklist']);
 var crimeRouter = module.exports = Router();
 
-
-// https://data.seattle.gov/api/views/tn4m-tpqu/rows.json?accessType=DOWNLOAD
-
-
-// console.log('testing');
-// request.get('https://data.seattle.gov/api/views/xv6f-9u5j/rows.json?accessType=DOWNLOAD')
-
-crimeRouter.get('/test', (req, res) => {
-  console.log('testing');
-  request.get('https://data.seattle.gov/api/views/tn4m-tpqu/rows.json?accessType=DOWNLOAD')
-    .end((err, res) => {
-      if (err) { console.log(err);
-      }
-      for (var i = 0; i < res.body.data.length; i++) {
-        console.log(res.body.data[i][20]);
-      }
-    });
-  console.log(res.body.data.length);
-  res.end();
-});
 
 
 crimeRouter.post('/crime', bpj, (req, res) => {
@@ -50,14 +28,12 @@ crimeRouter.post('/crime', bpj, (req, res) => {
 
           newCrime.save((err, data) => {
             if (err) return eH(err, res);
-            // console.log('posted');
             console.log(res.body.data.length);
           });
 
           console.log(res.body.data.length);
         }
       });
-
 
   console.log(req.body);
 });
