@@ -1,11 +1,11 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const crimeRouter = require(__dirname + '/router/crime_router');
 // require router files here
 
-
 // app.use other routes here
-
+app.use('/api', crimeRouter);
 app.use('/*', (req, res) => {
   res.status(400).send('not found');
 });
