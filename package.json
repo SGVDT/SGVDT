@@ -1,0 +1,51 @@
+{
+  "name": "sgvdt",
+  "version": "1.0.0",
+  "description": "Seattle Gun Violence Data Tracker",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SGVDT/SGVDT.git"
+  },
+  "author": {
+    "name": "Heidi Laursen",
+    "email": "heidilaursen@yahoo.com"
+  },
+  "contributors": [
+    {
+      "name": "Maria Romero",
+      "email": "mariaromero18e@gmail.com"
+    },
+    {
+      "name": "Kristopher Skelton",
+      "email": "kmskelton@outlook.com"
+    },
+    {
+      "name": "Shelly Yusuf",
+      "email": "ShellyNYusuf@gmail.com"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SGVDT/SGVDT/issues"
+  },
+  "homepage": "https://github.com/SGVDT/SGVDT#readme",
+  "dependencies": {
+    "express": "^4.13.4",
+    "mongoose": "^4.4.14"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^2.0.1",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^2.0.0",
+    "gulp-mocha": "^2.2.0",
+    "mocha": "^2.4.5"
+  }
+}
