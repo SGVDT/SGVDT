@@ -4,7 +4,7 @@ const eH = require(__dirname + '/../lib/error_handler');
 const request = require('superagent');
 var adminRouter = module.exports = exports = Router();
 
-adminRouter.getAllData = function() {
+var getAllData = function() {
   request.get('https://data.seattle.gov/api/views/tn4m-tpqu/rows.json?accessType=DOWNLOAD')
     .end((err, res) => {
       if (err) {
@@ -27,4 +27,8 @@ adminRouter.getAllData = function() {
       console.log('all data written to DB with ' + res.body.data.length + 'documents');
     });
 };
-adminRouter.getAllData();
+
+adminRouter.get('/admin', (req, res) => {
+  getAllData();
+  res.status(200).send('data stored to DB');
+});
