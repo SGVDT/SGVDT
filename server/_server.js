@@ -10,9 +10,9 @@ const userRouter = require(__dirname + '/router/user_router');
 app.use('/api', adminRouter);
 app.use('/api', crimeRouter);
 app.use('/', userRouter);
-app.use('/*', (req, res) => {
-  res.status(400).send('not found');
-});
+// app.use('/*', (req, res) => {
+//   res.status(400).send('not found');
+// });
 
 module.exports = exports = function(port, mongooseConnect, callBack) {
   mongoose.connect(mongooseConnect);

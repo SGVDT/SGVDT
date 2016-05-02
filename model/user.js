@@ -2,9 +2,11 @@
 
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+// const crypto = require('crypto');
+const jwt = require('jsonwebtoken');
 
 var userSchema = new mongoose.Schema({
-  name: { type: String, unique: true },
+  username: { type: String, unique: true },
   authentication: {
     email: { type: String },
     password: { type: String, require: true }
@@ -12,13 +14,17 @@ var userSchema = new mongoose.Schema({
   zipcode: { type: Number }
 });
 
-userSchema.methods.hashPassword = function(password) {
+userSchema.methods.generateHash = function(password) {
   var hash = this.authentication.password = bcrypt.hashSync(password, 8);
   return hash;
 };
 
 userSchema.methods.compareHash = function(password) {
   return bcrypt.compareSync(password, this.authentication.password);
+};
+
+userSchema.methods.generateToken = function() {
+  return jwt.sign({ idd: this._id }, process.env.APP_SECRET);
 };
 
 module.exports = exports = mongoose.model('user', userSchema);
