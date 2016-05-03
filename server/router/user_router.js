@@ -18,21 +18,22 @@ router.post('/signup', jsonParser, (req, res) => {
 
   var newUser = new User(req.body);
   newUser.generateHash(password);
-  console.log(password + 'from genHash');
+  console.log(password + ' from genHash');
   password = null;
 
   newUser.save((err, user) => {
     if (err) {
+      console.log(err);
       return res.status(500).json({ msg: 'could not create user' });
     }
 
-    user.generateToken((err, token) => {
+      var token = user.generateToken();
+
       if (err) {
         return res.status(500).json({ msg: 'could not generate token' });
       }
       res.json({ token });
     });
-  });
 });
 
 router.get('/signin', basicHTTP, (req, res) => {
@@ -49,12 +50,10 @@ router.get('/signin', basicHTTP, (req, res) => {
       return res.status(500).json({ msg: 'could not authenticate' });
     }
 
-    user.generateToken((err, token) => {
+    var token = user.generateToken();
       if (err) {
         return res.status(500).json({ msg: 'could not generate' });
       }
-
       res.json({ token });
     });
-  });
 });
