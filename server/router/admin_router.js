@@ -5,26 +5,28 @@ const request = require('superagent');
 var adminRouter = module.exports = exports = Router();
 
 var getAllData = function() {
-  request.get('https://data.seattle.gov/api/views/tn4m-tpqu/rows.json?accessType=DOWNLOAD')
+  request.get('https://data.seattle.gov/resource/tn4m-tpqu.json')
     .end((err, res) => {
       if (err) {
-        return eH(err, res);
+        return eH(err);
       }
-      for (var i = 0; i < res.body.data.length; i++) {
+      for (var i = 0; i < res.body.length; i++) {
         var newCrime = new Crime({
-          offense: res.body.data[i][14],
-          date: res.body.data[i][15],
-          longitude: res.body.data[i][22],
-          lattitude: res.body.data[i][23],
-          zone: res.body.data[i][20]
+          offense: res.body[i].offense_type,
+          date: res.body[i].occurred_date_or_date_range_start.slice(0, 10),
+          time: res.body[i].occurred_date_or_date_range_start.slice(11),
+          longitude: res.body[i].longitude,
+          lattitude: res.body[i].lattitude,
+          zone: res.body[i].zone_beat,
+          rms_cdw_id: res.body[i].rms_cdw_id
         });
-        newCrime.save( (err, data) => {
+        newCrime.save( (err) => {
           if (err) {
-            return eH(err, res);
+            return eH(err);
           }
         });
       }
-      console.log('all data written to DB with ' + res.body.data.length + 'documents');
+      console.log('all data written to DB with ' + res.body.length + ' documents');
     });
 };
 
