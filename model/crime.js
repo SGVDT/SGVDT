@@ -4,9 +4,12 @@ const mongoose = require('mongoose');
 var crimeSchema = new mongoose.Schema({
   offense: { type: String },
   date: { type: String },
+  day: { type: Number },
+  month: { type: Number },
+  year: { type: Number },
   time: { type: String },
   longitude: { type: Number },
-  lattitude: { type: Number },
+  latitude: { type: Number },
   zone: { type: String },
   rms_cdw_id: { type: String }
 });
