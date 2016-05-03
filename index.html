@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript">
+      $('#splash').ready() {
+        $('#main').load('404.html');
+        setTimeout(function() {
+          $('#main').ready(function() {
+            $('#splash').remove();
+            window.location.href = "404.html";
+          });
+        }, 2000);
+      };
+    </script>
+    <link rel="shortcut icon" href="/favicon.ico">
+  </head>
+  <body>
+    <div id="splash" style="position: absolute; top: 0px; bottom: 0px, left: 0px; right: 0px; z-index: 10;">
+      <p>Splash page content</p>
+    </div>
+    <div id="main">
+      <p>Main page-y stuff</p>
+    </div>
+  </body>
+</html>
