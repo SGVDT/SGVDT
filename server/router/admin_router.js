@@ -30,5 +30,5 @@ var getAllData = function() {
 
 adminRouter.get('/admin', (req, res) => {
   getAllData();
-  res.status(200).send('data stored to DB');
+  return res.status(200).send('data stored to DB');
 });
