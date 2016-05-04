@@ -42,22 +42,6 @@ var dailyData = function(callback) {
         });
 
         dailyUpdateArray.push(newCrime);
-      };
-      for (var j = 0; j < dailyUpdateArray.length; j++) {
-        console.log("gonna get " , dailyUpdateArray[j].rms_cdw_id );
-        Crime.find({
-          rms_cdw_id: dailyUpdateArray[j].rms_cdw_id
-        }, (err, data) => {
-          console.log("data = ", data);
-          console.log("about to save " , dailyUpdateArray[j] );
-          if (!data) {
-            dailyUpdateArray[j].save((err, data) => {
-              if (err) {
-                return eH(err);
-              }
-            });
-          }
-        });
       }
         console.log('daily' + dailyUpdateArray);
         callback(dailyUpdateArray);
