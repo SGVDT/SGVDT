@@ -18,14 +18,15 @@ var dayBefore = {
   year: (new Date(Date.now() - 1.73e+8)).getFullYear()
 };
 
-var dailyData = function() {
-  request.get('https://data.seattle.gov/resource/tn4m-tpqu.json?month=' + '4' + '&year=' + '2016')
+var dailyData = function(callback) {
+  request.get('https://data.seattle.gov/resource/tn4m-tpqu.json?month=' + '5' + '&year=' + '2016')
     .end((err, res) => {
-      if (err) {
-        return eH(err);
-      }
-      dailyUpdateArray = [];
-      console.log("body = ", res.body);
+      if (err) return eH(err);
+
+      var dailyUpdateArray = [];
+
+      console.log('body length ' + res.body.length);
+
       for (var i = 0; i < res.body.length; i++) {
         var newCrime = new Crime({
           offense: res.body[i].offense_type,
@@ -39,28 +40,31 @@ var dailyData = function() {
           zone: res.body[i].zone_beat,
           rms_cdw_id: res.body[i].rms_cdw_id
         });
+
         dailyUpdateArray.push(newCrime);
-      };
-      for (var j = 0; j < dailyUpdateArray.length; j++) {
-        console.log("gonna get " , dailyUpdateArray[j].rms_cdw_id );
-        Crime.find({
-          rms_cdw_id: dailyUpdateArray[j].rms_cdw_id
-        }, (err, data) => {
-          console.log("data = ", data);
-          console.log("about to save " , dailyUpdateArray[j] );
-          if (!data) {
-            dailyUpdateArray[j].save((err, data) => {
-              if (err) {
-                return eH(err);
-              }
-            });
-          }
-        });
       }
-      console.log('Today\'s data is in the array');
+        console.log('daily' + dailyUpdateArray);
+        callback(dailyUpdateArray);
     });
 };
+
+var saveNewCrimes = function(newArray) {
+    newArray.map( (crime) => {
+      Crime.find({ rms_cdw_id: crime.rms_cdw_id }, (err, data) => {
+        if (err) return eH(err);
+        console.log('no of data from db based on id' + data.length);
+        if (data.length === 0) {
+          crime.save( (err, data) => {
+            if (err) return eH(err);
+            console.log('new crime has been added to db' + crime.rms_cdw_id);
+          });
+        }
+      });
+    });
+};
+// dailyData(saveNewCrimes);
+
 setInterval(() => {
-  dailyData();
-  console.log("getting data");
+  dailyData(saveNewCrimes);
+  console.log('getting data');
 }, 4000);
