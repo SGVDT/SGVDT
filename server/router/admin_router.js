@@ -5,7 +5,7 @@ const request = require('superagent');
 var adminRouter = module.exports = exports = Router();
 
 var getAllData = function() {
-  request.get('https://data.seattle.gov/resource/tn4m-tpqu.json?year=2014&month=12')
+  request.get('https://data.seattle.gov/resource/tn4m-tpqu.json?')
     .end((err, res) => {
       if (err) {
         return eH(err);
