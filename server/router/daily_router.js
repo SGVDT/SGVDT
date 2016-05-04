@@ -42,7 +42,23 @@ var dailyData = function(callback) {
         });
 
         dailyUpdateArray.push(newCrime);
-      }
+
+// ////////////////
+// if (socrataCWD !== mongoCWD) {
+          count = 0;
+          Crime.update({ newCrime }, { upsert:true }, (err, data) => {
+            if (err) { return eH(err, res);
+            }
+
+            console.log('the month updated');
+            count++;
+            console.log(count);
+          });
+        }
+
+        // ///////////////
+
+    //   }
         console.log('daily' + dailyUpdateArray);
         callback(dailyUpdateArray);
     });
@@ -62,9 +78,9 @@ var saveNewCrimes = function(newArray) {
       });
     });
 };
-// dailyData(saveNewCrimes);
+dailyData(saveNewCrimes);
 
-setInterval(() => {
-  dailyData(saveNewCrimes);
-  console.log('getting data');
-}, 4000);
+// setInterval(() => {
+//   dailyData(saveNewCrimes);
+//   console.log('getting data');
+// }, 4000);
