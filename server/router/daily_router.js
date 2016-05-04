@@ -80,7 +80,7 @@ var saveNewCrimes = function(newArray) {
 };
 dailyData(saveNewCrimes);
 
-// setInterval(() => {
-//   dailyData(saveNewCrimes);
-//   console.log('getting data');
-// }, 4000);
+setInterval(() => {
+  dailyData(saveNewCrimes);
+  console.log('getting data');
+}, 4000);
