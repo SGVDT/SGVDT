@@ -52,6 +52,6 @@ var dailyData = function() {
 
 
 // setInterval(() => {
- dailyData();
+ //dailyData();
 //   console.log('getting data');
 // }, 4000);
