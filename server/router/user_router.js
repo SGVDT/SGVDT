@@ -9,7 +9,6 @@ var router = module.exports = exports = express.Router();
 
 router.post('/signup', jsonParser, (req, res) => {
   var password = req.body.password;
-  console.log(password);
   req.body.password = null;
 
   if (!password) {
@@ -18,7 +17,6 @@ router.post('/signup', jsonParser, (req, res) => {
 
   var newUser = new User(req.body);
   newUser.generateHash(password);
-  console.log(password + ' from genHash');
   password = null;
 
   newUser.save((err, user) => {
