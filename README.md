@@ -39,7 +39,7 @@ From a browser, users can filter the data using the following terms:
 * day
 * zone (sorts by SPD zone)
 
-Use is as follows once the Node server is running (as above):
+Use in the browser as follows once the Node server is running (as above):
 ```
 localhost:3000/api/offenses?year=2015
 ```
