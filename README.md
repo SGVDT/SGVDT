@@ -33,7 +33,7 @@ curl localhost:3000/signin username="user name" password="password of your choic
 
 From a browser, users can filter the data using the following terms:
 * offense
-* summary (a summarized offense description)
+* summary (a summarized offense description. This must be in all caps; see example below.)
 * year
 * month
 * day
@@ -60,7 +60,7 @@ CURL users wrap the entire request in quotes:
 ```
 curl 'localhost:3000/api/offenses?year=2016&month=5'
 ```
-The above returns all incidents for May, 2016. 
+The above returns all incidents for May, 2016.
 
 ### Acknowledgements and Modules Used
   * [bcrypt](https://www.npmjs.com/package/bcrypt)
