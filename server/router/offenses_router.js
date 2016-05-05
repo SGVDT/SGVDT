@@ -9,3 +9,14 @@ offenseRouter.get('/offenses', (req, res) => {
     res.status(200).json(data);
   });
 });
+
+
+offenseRouter.get(/crime/, (req, res) => {
+  console.log(req.url);
+  console.log(req.query);
+
+  Offense.find( req.query, (err, data) => {
+    if (err) return eH(err, res);
+    res.status(200).json(data);
+  });
+});
