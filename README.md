@@ -56,11 +56,11 @@ http localhost:3000/api/offenses year==2016 month==5
 ```
 Note: there is a space between offenses and year, and between 2016 and month. Each search term must use double-equals.
 
-CURL is only supported for a single search term:
+CURL users wrap the entire request in quotes:
 ```
-curl localhost:3000/api/offenses?year=2016
+curl 'localhost:3000/api/offenses?year=2016&month=5'
 ```
-
+The above returns all incidents for May, 2016. 
 
 ### Acknowledgements and Modules Used
   * [bcrypt](https://www.npmjs.com/package/bcrypt)
