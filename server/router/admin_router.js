@@ -1,6 +1,6 @@
 const Router = require('express').Router;
-const Crime = require(__dirname + '/../../model/crime');
-const eH = require(__dirname + '/../lib/error_handler');
+const Offense = require(__dirname + '/../../model/offense');
+const eH = require(__dirname + '/../../lib/error_handler');
 const request = require('superagent');
 var adminRouter = module.exports = exports = Router();
 
@@ -11,7 +11,7 @@ var getAllData = function() {
         return eH(err);
       }
       for (var i = 0; i < res.body.length; i++) {
-        var newCrime = new Crime({
+        var newOffense = new Offense({
           offense: res.body[i].offense_type,
           date: res.body[i].occurred_date_or_date_range_start.slice(0, 10),
           day: res.body[i].occurred_date_or_date_range_start.slice(8, 10),
@@ -23,7 +23,7 @@ var getAllData = function() {
           zone: res.body[i].zone_beat,
           rms_cdw_id: res.body[i].rms_cdw_id
         });
-        newCrime.save( (err) => {
+        newOffense.save( (err) => {
           if (err) {
             return eH(err);
           }

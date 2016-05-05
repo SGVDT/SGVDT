@@ -5,17 +5,16 @@ chai.use(chaiHttp);
 const User = require(__dirname + '/../model/user');
 const mongoose = require('mongoose');
 const request = chai.request;
-// the following order is important:
 const port = process.env.PORT = 5555;
 process.env.MONGO_URI = 'mongodb://localhost/user_test_db';
 var app = require(__dirname + '/../server/_server');
+var server;
 
 describe('signup and signin user routes', function() {
-  before((done) => {
-    app(port, process.env.MONGO_URI, () => {
-      var newUser = new User ({ username: 'one', password: 'one' });
+  before( (done) => {
+    server = app(port, process.env.MONGO_URI, () => {
+      var newUser = new User({ username: 'one', password: 'one' });
       newUser.generateHash('one');
-
       newUser.save((err, data) => {
         if (err) throw err;
         this.user = data;
@@ -24,10 +23,11 @@ describe('signup and signin user routes', function() {
     done();
     });
   });
-
-  after(function(done) {
-    mongoose.connection.db.dropDatabase(() => {
-      mongoose.disconnect(done);
+  after( (done) => {
+    mongoose.connection.db.dropDatabase( () => {
+      mongoose.disconnect( () => {
+        server.close(done);
+      });
     });
   });
 
@@ -35,7 +35,9 @@ describe('signup and signin user routes', function() {
     request('localhost:' + port)
     .post('/signup')
     .send({ username: 'two', password: 'two' })
-    .end((err, res) => {
+    .end( (err, res) => {
+      expect(err).to.eql(null);
+      expect(res.status).to.eql(200);
       User.findOne({ username: 'two' }, (err, data) => {
         expect(err).to.eql(null);
         expect(data.username).to.eql('two');
@@ -44,13 +46,13 @@ describe('signup and signin user routes', function() {
       done();
     });
   });
-
   it('should log in user and generate a token at signin', (done) => {
     request('localhose: ' + port)
     .get('/signin')
     .auth('one', 'one')
     .end((err, res) => {
       expect(err).to.eql(null);
+      expect(res.status).to.eql(200);
       expect(res.body).to.not.eql(null);
       expect(res.body.token).to.not.eql(null);
     });
