@@ -50,6 +50,17 @@ localhost:3000/api/offenses?year=2015&summary="ROBBERY"&zone="G3"
 ```
 The above will return all records for 2015 that also contain "ROBBERY" in zone G3.
 
+[HTTPie](https://github.com/jkbrzt/httpie) users search as follows:
+```
+http localhost:3000/api/offenses year==2016 month==5
+```
+Note: there is a space between offenses and year, and between 2016 and month. Each search term must use double-equals.
+
+CURL is only supported for a single search term:
+```
+curl localhost:3000/api/offenses?year=2016
+```
+
 
 ### Acknowledgements and Modules Used
   * [bcrypt](https://www.npmjs.com/package/bcrypt)
