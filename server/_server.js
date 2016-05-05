@@ -9,7 +9,7 @@ const userRouter = require(__dirname + '/router/user_router');
 
 // app.use other routes here
 app.use('/api', adminRouter);
-app.use('/api', dailyRouter);
+// app.use('/api', dailyRouter);
 app.use('/api', crimeRouter);
 app.use('/', userRouter);
 // app.use('/*', (req, res) => {
