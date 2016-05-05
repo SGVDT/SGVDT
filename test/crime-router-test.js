@@ -4,28 +4,23 @@ const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 const mongoose = require('mongoose');
 const request = chai.request;
+const Crime = require(__dirname + '/../model/crime');
 // the following order is important:
 const port = process.env.PORT = 11235;
 process.env.MONGO_URI = 'mongodb://localhost/admin_test_db';
-require(__dirname + '/../server/server');
+var app = require(__dirname + '/../server/_server');
 
-describe('the GET method on ADMIN', () => {
-  after((done) => {
-    mongoose.connection.db.dropDatabase(() => {
+describe('the GET method on CRIME', () => {
+  before((done) => {
+    app(port, process.env.MONGO_URI, () => {
+      var newCrime = new Crime({offense: "crime"});
+      newCrime.save((err, data) => {
+        if (err) throw err;
+        this.crime = data;
+      });
       done();
     });
   });
-  it('should GET all the crimes', (done) => {
-    request('localhost:' + port)
-      .get('/api/admin')
-      .end((err, res) => {
-        expect(err).to.eql(null);
-        expect(res.status).to.eql(200);
-        done();
-      });
-  });
-});
-describe('the GET method on CRIME', () => {
   after((done) => {
     mongoose.connection.db.dropDatabase(() => {
       done();
@@ -37,7 +32,7 @@ describe('the GET method on CRIME', () => {
       .end((err, res) => {
         expect(err).to.eql(null);
         expect(Array.isArray(res.body)).to.eql(true);
-        expect(res.body.length).to.eql(0);
+        expect(res.body[0].offense).to.eql(this.crime.offense);
         done();
       });
   });
