@@ -3,8 +3,8 @@ var eslint = require('gulp-eslint');
 var mocha = require('gulp-mocha');
 
 var paths = {
-  scripts: [__dirname + '/lib/*.js', __dirname + '/index.js'],
-  test: [__dirname + 'test/test.js']
+  scripts: ['lib/**/*.js', 'model/**/*.js', 'server/**/*.js', 'index.js', 'gulpfile.js'],
+  test: ['test/**/*test.js']
 };
 
 gulp.task('lint:test', () => {
@@ -25,7 +25,7 @@ gulp.task('lint:nontest', () => {
         'es6'
       ]
     }))
-    .pipe(eslint.format())
+    .pipe(eslint.format());
 });
 
 gulp.task('mocha', () => {
