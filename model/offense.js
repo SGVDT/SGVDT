@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
-
-var crimeSchema = new mongoose.Schema({
+var offenseSchema = new mongoose.Schema({
   offense: { type: String },
+  summary: { type: String },
   date: { type: String },
   day: { type: Number },
   month: { type: Number },
@@ -14,4 +14,4 @@ var crimeSchema = new mongoose.Schema({
   rms_cdw_id: { type: String }
 });
 
-module.exports = mongoose.model('Crime', crimeSchema);
+module.exports = mongoose.model('Offense', offenseSchema);

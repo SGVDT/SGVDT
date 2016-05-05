@@ -1,9 +1,7 @@
-'use strict';
-
 const express = require('express');
 const User = require(__dirname + '/../../model/user');
 const jsonParser = require('body-parser').json();
-const basicHTTP = require(__dirname + '/../../LIB/basic_http');
+const basicHTTP = require(__dirname + '/../../lib/basic_http');
 
 var router = module.exports = exports = express.Router();
 
@@ -50,7 +48,7 @@ router.get('/signin', basicHTTP, (req, res) => {
 
     var token = user.generateToken();
       if (err) {
-        return res.status(500).json({ msg: 'could not generate' });
+        return res.status(500).json({ msg: 'could not generate token' });
       }
       res.json({ token });
     });
