@@ -1,15 +1,13 @@
-const express = require('express');
-const app = express();
-const PORT = 3000;
-const mongoose = require('mongoose');
+if (!process.env.APP_SECRET) {
+  throw new Error('you need to set app secret env variable');
+}
 
-const Crime = require(__dirname + '/../model/crime');
-mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost/crimes_db');
+const server = require(__dirname + '/_server');
+const port = process.env.PORT || 3000;
+const mongooseConnect = process.env.MONGODB_URI || 'mongodb://localhost/sgvdt_appDB';
 
-
-const crimeRouter = require(__dirname + '/router/crime_router');
-
-
-
-app.use('/api', crimeRouter);
-app.listen(PORT, () => console.log('server up on ' + PORT));
+server(port, mongooseConnect, () => {
+  console.log('server up on ' + port);
+  var setupProductionDb = require(__dirname + '/../lib/setInterval');
+  setupProductionDb();
+});
