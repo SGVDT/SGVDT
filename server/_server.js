@@ -1,20 +1,16 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const crimeRouter = require(__dirname + '/router/crime_router');
 const adminRouter = require(__dirname + '/router/admin_router');
-const dailyRouter = require(__dirname + '/router/daily_router');
+const offensesRouter = require(__dirname + '/router/offenses_router');
 const userRouter = require(__dirname + '/router/user_router');
-// require router files here
 
-// app.use other routes here
 app.use('/api', adminRouter);
-app.use('/api', dailyRouter);
-app.use('/api', crimeRouter);
+app.use('/api', offensesRouter);
 app.use('/', userRouter);
-// app.use('/*', (req, res) => {
-//   res.status(400).send('not found');
-// });
+app.use('/*', (req, res) => {
+  res.status(404).send('not found');
+});
 
 module.exports = exports = function(port, mongooseConnect, callBack) {
   mongoose.connect(mongooseConnect);

@@ -1,15 +1,12 @@
-'use strict';
-
 const express = require('express');
 const User = require(__dirname + '/../../model/user');
 const jsonParser = require('body-parser').json();
-const basicHTTP = require(__dirname + '/../../LIB/basic_http');
+const basicHTTP = require(__dirname + '/../../lib/basic_http');
 
 var router = module.exports = exports = express.Router();
 
 router.post('/signup', jsonParser, (req, res) => {
   var password = req.body.password;
-  console.log(password);
   req.body.password = null;
 
   if (!password) {
@@ -18,7 +15,6 @@ router.post('/signup', jsonParser, (req, res) => {
 
   var newUser = new User(req.body);
   newUser.generateHash(password);
-  console.log(password + ' from genHash');
   password = null;
 
   newUser.save((err, user) => {
@@ -52,7 +48,7 @@ router.get('/signin', basicHTTP, (req, res) => {
 
     var token = user.generateToken();
       if (err) {
-        return res.status(500).json({ msg: 'could not generate' });
+        return res.status(500).json({ msg: 'could not generate token' });
       }
       res.json({ token });
     });
