@@ -5,5 +5,5 @@ sudo: required
 before_script:
   - npm install -g eslint mocha chai
 script:
-  - eslint $(find . -name '*.js' | grep -v 'vendor' | grep -v 'node_modules')
-  - ./script/test
+  - eslint $(find . -name '*.js' | grep -v 'node_modules')
+  - mocha
