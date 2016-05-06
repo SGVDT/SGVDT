@@ -15,6 +15,8 @@ In its nascent form, users can create the simplest of accounts with a username, 
 ### Installation
 From a command line in the directory where the repository has been cloned:
 ```
+npm install
+
 node index
 ```
 Do not close this instance of the terminal, nor close the connection.
