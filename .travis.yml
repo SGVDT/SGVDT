@@ -1,10 +1,9 @@
 language: node_js
 node_js:
-  -"~4.3.1"
-branches:
-  only:
-    -master
+  - "4"
+sudo: required
 before_script:
-  -npm install
-  -npm test
-  
+  - npm install -g eslint mocha chai
+script:
+  - eslint $(find . -name '*.js' | grep -v 'vendor' | grep -v 'node_modules')
+  - ./script/test
