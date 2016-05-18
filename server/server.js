@@ -8,6 +8,6 @@ const mongooseConnect = process.env.MONGODB_URI || 'mongodb://localhost/sgvdt_ap
 
 server(port, mongooseConnect, () => {
   console.log('server up on ' + port);
-  var setupProductionDb = require(__dirname + '/../lib/setInterval');
+  var setupProductionDb = require(__dirname + '/../lib/set_interval');
   setupProductionDb();
 });
