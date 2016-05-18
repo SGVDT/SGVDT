@@ -15,6 +15,8 @@ From a command line in the directory where the repository has been cloned:
 ```
 npm install
 
+export APP_SECRET="ssshhh"
+
 node index
 ```
 Do not close this instance of the terminal, nor close the connection.
