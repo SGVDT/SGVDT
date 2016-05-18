@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/pnwlady/SGVDT.svg?branch=master)](https://travis-ci.org/pnwlady/SGVDT)
-
 # Seattle Gun Violence Data Tracker
 
 A [Code Fellows](https://www.codefellows.org/) project by [Heidi Laursen](https://github.com/pnwlady/SGVDT) [Maria Romero](https://github.com/MiaRomero/SGVDT) [Kristopher Skelton](https://github.com/KMSkelton/SGVDT) [Shelly Yusuf](https://github.com/CWShelly/SGVDT)
