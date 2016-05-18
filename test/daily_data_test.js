@@ -11,7 +11,7 @@ const app = require(__dirname + '/../server/_server');
 var server;
 
 const Offense = require(__dirname + '/../model/offense');
-const dailyData = require(__dirname + '/../lib/dailyUpdate');
+const dailyData = require(__dirname + '/../lib/daily_update');
 
 describe('the dailyData update function', function() {
   this.timeout(4000);
