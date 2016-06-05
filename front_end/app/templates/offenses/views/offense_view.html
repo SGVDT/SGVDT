@@ -1,0 +1,10 @@
+
+  <ul>
+    <li data-ng-repeat="error in offensectrl.errors">{{error.message}}<button data-ng-click="offensectrl.errors.splice(offensectrl.errors.indexOf(error), 1)">Acknowledge</li>
+  </ul>
+
+
+<ol id = "offenseList">
+<offense-list-item data-ng-repeat="offenses in offensectrl.offenses" data-offense="offenses"> </offense-list-item>
+
+</ol>

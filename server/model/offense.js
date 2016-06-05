@@ -11,7 +11,9 @@ var offenseSchema = new mongoose.Schema({
   longitude: { type: Number },
   latitude: { type: Number },
   zone: { type: String },
+  /* eslint-disable camelcase */
   rms_cdw_id: { type: String }
+  /* eslint-enable camelcase */
 });
 
 module.exports = mongoose.model('Offense', offenseSchema);
