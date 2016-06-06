@@ -10,7 +10,7 @@ module.exports = function(app) {
         offense: '='
     },
       link: function(scope, element, attrs, controller) {
-          // examine this at some point
+          // take care of this at some point
         scope.remove = controller.removeMug;
       }
     };
