@@ -1,5 +1,5 @@
 const angular = require('angular');
-const sgvdtApp = angular.module('sgvdtApp', [require('angular-route')]);
+const sgvdtApp = angular.module('sgvdtApp', [require('angular-route'), 'ui.bootstrap']);
 require('./services')(sgvdtApp);
 require('./offenses')(sgvdtApp);
 
