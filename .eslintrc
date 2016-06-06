@@ -201,7 +201,7 @@
     "max-depth": 0,
     "max-len": [
       1,
-      100,
+      150,
       2
     ],
     "max-params": 0,
