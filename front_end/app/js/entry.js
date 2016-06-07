@@ -1,9 +1,19 @@
 const angular = require('angular');
+
+
+// const angmaps = require('angular-google-maps');
+// const logger = require('angular-simple-logger');
+// const lodash = require('lodash');
+// // require('angular-route');
+
+
+
 const angmaps = require('angular-google-maps');
 const logger = require('angular-simple-logger');
 const lodash = require('lodash');
 
 const sgvdtApp = angular.module('sgvdtApp', [require('angular-route'), 'uiGmapgoogle-maps']);
+
 require('./services')(sgvdtApp);
 require('./offenses')(sgvdtApp);
 require('./maps')(sgvdtApp);
