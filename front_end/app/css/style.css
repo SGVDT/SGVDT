@@ -1,12 +1,15 @@
-html, body, main, #map_canvas {
+html, body, main,  #map_canvas {
          height: 100%;
          width: 100%;
          margin: 0px;
      }
 
-     #map_canvas {
+     #map_canvas{
          position: relative;
+         height: 500px;
+         width:500px;
      }
+
 
      .angular-google-map-container {
          position: absolute;
@@ -15,6 +18,10 @@ html, body, main, #map_canvas {
          right: 0;
          left: 0;
      }
-p{
-  color:green;
+
+     p{
+       color:green;
+     }
+ol{
+  height: 200px;
 }
