@@ -8,5 +8,6 @@ module.exports = exports = function(app) {
       { errMessages: { getArticles: 'could not retrieve news articles' } });
     this.getArticles = remote.getArticles.bind(remote);
     this.getArticles();
+    console.log(this.articles);
   }]);
 };
