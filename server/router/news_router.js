@@ -5,12 +5,12 @@ const request = require('superagent');
 var newsRouter = module.exports = exports = Router();
 
 newsRouter.get('/news', (req, res) => {
-  console.log('watsoN:  ' + process.env. );
+  console.log('watsoN:  ' + process.env.WATSON_API );
   request.get('https://gateway-a.watsonplatform.net/calls/data/GetNews?outputMode=json' +
   '&return=enriched.url.url,enriched.url.title,enriched.url.publicationDate.date,' +
   'enriched.url.image,enriched.url.text&start=now-30d&end=now&q.enriched.url.title=' +
   'A[seattle^gun]&q.enriched.url.text=A[seattle^gun^violence]&return=enriched.url.title&apikey=' +
-  'KEY')
+  process.env.WATSON_API)
 
   .end((err, data) => {
     console.log(data);
