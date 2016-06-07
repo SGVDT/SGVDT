@@ -1,25 +1,15 @@
 const angular = require('angular');
-// const angmaps = require('angular-google-maps');
-// const logger = require('angular-simple-logger');
-// const lodash = require('lodash');
-// // require('angular-route');
+const angmaps = require('angular-google-maps');
+const logger = require('angular-simple-logger');
+const lodash = require('lodash');
 
-const sgvdtApp = angular.module('sgvdtApp', [require('angular-route')]);
+const sgvdtApp = angular.module('sgvdtApp', [require('angular-route'), 'uiGmapgoogle-maps']);
 require('./services')(sgvdtApp);
 require('./offenses')(sgvdtApp);
 require('./maps')(sgvdtApp);
 
-// const sgvdtApp = angular.module('sgvdtApp', ['uiGmapgoogle-maps']);
-    // .controller('mainCtrl', function($scope) {
-    //     $scope.map = { center: { latitude: 45, longitude: -73 }, zoom: 8 };
-    // });
 
 
-    // require('./services')(sgvdtApp);
-    // require('./offenses')(sgvdtApp);
-    // require('./maps')(sgvdtApp);
-    //
-    //
 
 sgvdtApp.config(['$routeProvider', function($rp) {
 $rp
@@ -29,11 +19,19 @@ $rp
     controllerAs: 'offensectrl'
 })
 .when('/map', {
-    templateUrl: 'templates/maps/views/map_view.html'
-    // controller: 'mainCtrl',
-    // controllerAs: 'map'
+    templateUrl: 'templates/maps/views/map_view.html',
+    controller: 'MapController',
+    controllerAs: 'supermapctrl'
 })
 .otherwise({
     redirectTo: '/offenses'
 });
 }]);
+
+sgvdtApp.config(function(uiGmapGoogleMapApiProvider) {
+    uiGmapGoogleMapApiProvider.configure({
+        //    key: 'your api key',
+        v: '3.20', //defaults to latest 3.X anyhow
+        libraries: 'weather,geometry,visualization'
+    });
+});
