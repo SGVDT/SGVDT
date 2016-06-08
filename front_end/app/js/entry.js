@@ -27,6 +27,16 @@ $rp
     controller: 'MapController',
     controllerAs: 'xxctrl'
 })
+.when('/news', {
+    templateUrl: 'templates/news/views/news_view.html',
+    controller: 'NewsController',
+    controllerAs: 'newsctrl'
+})
+.when('/twitter', {
+  templateUrl: 'templates/twitter/views/twitter_view.html',
+  controller: 'TwitterController',
+  controllerAs: 'newsctrl'
+})
 .otherwise({
     redirectTo: '/offenses'
 });
