@@ -3,8 +3,6 @@ module.exports = function(app) {
     return {
       restrict: 'EAC',
       replace: true,
-      require: '^ngController',
-      transclude: true,
       templateUrl: '/templates/news/directives/news_list_item.html',
       scope: {
         article: '='
