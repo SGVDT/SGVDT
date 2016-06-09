@@ -80,8 +80,6 @@ $scope.randomMarkers = [];
                  });
               });
              $scope.randomMarkers = markers;
-            //  console.log(markers);
-            //  console.log(markers.length);
 
          }
      }, true);
