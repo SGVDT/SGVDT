@@ -1,5 +1,3 @@
-
-
 module.exports = function(app) {
   app.factory('handleError', function() {
     return function(errorsArr, message) {
