@@ -4,7 +4,7 @@ const logger = require('angular-simple-logger');
 const lodash = require('lodash');
 
 const sgvdtApp = angular.module('sgvdtApp', [require('angular-route'),
-require('angular-ui-bootstrap'), 'uiGmapgoogle-maps']);
+require('angular-ui-bootstrap'), require('angular-resource'), 'uiGmapgoogle-maps']);
 
 // const sgvdtApp = angular.module('sgvdtApp', [require('angular-route'),
 // 'uiGmapgoogle-maps']);
@@ -18,9 +18,9 @@ require('./news')(sgvdtApp);
 sgvdtApp.config(['$routeProvider', function($rp) {
 $rp
 .when('/offenses', {
-    templateUrl: 'templates/offenses/views/offense_view.html',
-    controller: 'OffenseController',
-    controllerAs: 'offensectrl'
+    templateUrl: 'templates/offenses/views/offense_view.html'
+    // controller: 'OffenseController',
+    // controllerAs: 'offensectrl'
 })
 .when('/map', {
     templateUrl: 'templates/maps/views/map_view.html',
