@@ -5,6 +5,7 @@
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 html {
+  height: 100%;
   font-family: sans-serif;
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
@@ -1604,6 +1605,7 @@ pre code {
   }
 }
 .container-fluid {
+  height: 100%;
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
@@ -1956,6 +1958,7 @@ pre code {
     width: 58.33333333%;
   }
   .col-md-6 {
+    padding-top: 25px;
     width: 50%;
   }
   .col-md-5 {
@@ -5692,6 +5695,7 @@ button.list-group-item-danger.active:focus {
   border-bottom: 1px solid #ddd;
 }
 .panel-default {
+  height: 1125px;
   border-color: #ddd;
 }
 .panel-default > .panel-heading {

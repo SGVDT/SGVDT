@@ -6,7 +6,7 @@
 #map_canvas{
    position: relative;
    height: 500px;
-   width:500px;
+   width: 100%;
 }
 .angular-google-map-container {
    position: absolute;
@@ -17,6 +17,7 @@
 
 }
 #newsColumn {
+  height: 100%;
   padding-top: 80px;
 }
 #newsArticle {
@@ -30,6 +31,13 @@
   width: 100%;
   padding-bottom: 15px;
 }
-main {
+html {
+  height: 100%;
+}
+body {
   background-color: #AFB2B3;
+  height: 100%;
+}
+main {
+  height: 100%;
 }
