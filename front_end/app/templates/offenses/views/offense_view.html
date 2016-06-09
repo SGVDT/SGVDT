@@ -8,7 +8,7 @@
 
 <input type="text" ng-model="filterText" class="span2 search-query" placeholder="Filter current page">
 
-<button ng-click="filterText = null" class="btn">Clear Filter</button>
+<!-- <button ng-click="filterText = null" class="btn">Clear Filter</button> -->
 </div>
 
 </form>
@@ -20,8 +20,8 @@
 
      <th class="span1 sortable" ng-class="sortClass('comments')" ng-click="setSort('comments')">Offense</th>
      <th class="span1">Precinct</th>
-     <th>Year</th>
-     <th class="span1">Month</th>
+     <th>Date</th>
+     <th class="span1">Year</th>
     </tr>
    </thead>
    <tbody>
@@ -34,7 +34,7 @@
      <td class="text-center" ng-class="issue.year">{{offense.zone}}</td>
      <td class="text-center">
 
-       <a ng-click="setCurrentIssue(offense.year)">{{offense.month}}</a>
+       <a ng-click="setCurrentIssue(offense.year)">{{offense.date}}</a>
 
      </td>
      <td>{{offense.year}}</td>
