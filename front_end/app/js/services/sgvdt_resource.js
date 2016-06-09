@@ -1,5 +1,5 @@
 module.exports = function(app) {
-  app.factory('sgvdtResource', ['$http', 'handleError', function($http, handleError) {
+  app.factory('sgvdtResource', ['$http', 'sgvHandleError', function($http, handleError) {
     var Resource = function(resourceArr, errorsArr, baseUrl, options) {
       this.data = resourceArr;
     //   console.log(resourceArr);

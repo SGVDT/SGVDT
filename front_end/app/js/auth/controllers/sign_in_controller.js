@@ -1,7 +1,8 @@
 var baseUrl = require('../../config').baseUrl;
+
 module.exports = function(app) {
   app.controller('SignInController', ['$http', '$location', 'sgvHandleError', function($http, $location, handleError) {
-    this.buttonText = 'Sign in to existing user';
+    this.buttonText = 'Sign in';
     this.errors = [];
     this.authenticate = function(user) {
       $http({
