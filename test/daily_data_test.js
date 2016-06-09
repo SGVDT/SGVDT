@@ -11,8 +11,8 @@ const port = process.env.PORT = 5555;
 const app = require(__dirname + '/../server/_server');
 var server;
 
-const Offense = require(__dirname + '/../model/offense');
-const dailyData = require(__dirname + '/../lib/daily_update');
+const Offense = require(__dirname + '/../server/model/offense');
+const dailyData = require(__dirname + '/../server/lib/daily_update');
 
 describe('the dailyData update function', function() {
   this.timeout(4000);

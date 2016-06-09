@@ -12,7 +12,7 @@ const port = process.env.PORT = 5555;
 var app = require(__dirname + '/../server/_server');
 var server;
 
-const Offense = require(__dirname + '/../model/offense');
+const Offense = require(__dirname + '/../server/model/offense');
 
 describe('the GET method on /api/offenses route', function() {
   this.timeout(4000);
