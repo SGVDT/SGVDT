@@ -13,6 +13,7 @@ require('./services')(sgvdtApp);
 require('./offenses')(sgvdtApp);
 require('./maps')(sgvdtApp);
 require('./news')(sgvdtApp);
+require('./twitter')(sgvdtApp);
 
 
 sgvdtApp.config(['$routeProvider', function($rp) {
