@@ -12,7 +12,7 @@ const port = process.env.PORT = 5555;
 var app = require(__dirname + '/../server/_server');
 var server;
 
-const User = require(__dirname + '/../model/user');
+const User = require(__dirname + '/../server/model/user');
 
 describe('signup and signin user routes', function() {
   this.timeout(4000);
