@@ -7,7 +7,10 @@ var newsRouter = module.exports = exports = Router();
 
 newsRouter.get('/news', (req, res) => {
   var trigger = new EventEmitter();
-  request.get('https://gateway-a.watsonplatform.net/calls/data/GetNews?outputMode=json&return=enriched.url.url,enriched.url.title,enriched.url.publicationDate.date,enriched.url.image,enriched.url.text&start=now-45d&end=now&q.enriched.url.title=A[seattle^gun]&q.enriched.url.text=A[seattle^gun^violence]&return=enriched.url.title&apikey=' +
+  request.get('https://gateway-a.watsonplatform.net/calls/data/GetNews?outputMode=' +
+  'json&return=enriched.url.url,enriched.url.title,enriched.url.publicationDate.date,' +
+  'enriched.url.image,enriched.url.text&start=now-45d&end=now&q.enriched.url.title=' +
+  'A[seattle^gun]&q.enriched.url.text=A[seattle^gun^violence]&return=enriched.url.title&apikey=' +
   process.env.WATSON_API2)
 
   .end((err, data) => {

@@ -12,19 +12,12 @@ const port = process.env.PORT = 5555;
 var app = require(__dirname + '/../server/_server');
 var server;
 
-const Offense = require(__dirname + '/../server/model/offense');
-
-describe('the GET method on /api/offenses route', function() {
+describe('the GET method on /api/news route', function() {
   this.timeout(4000);
   before( (done) => {
     server = app(port, mongooseConnect, () => {
       console.log('server up on' + port);
-      var newOffense = new Offense({ offense: 'gunIncident' });
-      newOffense.save( (err, data) => {
-        if (err) throw err;
-        this.offense = data;
-        done();
-      });
+      done();
     });
   });
   after( (done) => {
@@ -36,13 +29,13 @@ describe('the GET method on /api/offenses route', function() {
       });
     });
   });
-  it('should GET all the offenses', (done) => {
+  it('should GET the Alchemy API endpoint', (done) => {
     request('localhost:' + port)
-      .get('/api/offenses')
+      .get('/api/news')
       .end((err, res) => {
         expect(err).to.eql(null);
-        expect(Array.isArray(res.body)).to.eql(true);
-        expect(res.body[0].offense).to.eql(this.offense.offense);
+        expect(res.status).to.eql(200);
+        expect(res).to.not.eql(null);
         done();
       });
   });
