@@ -1,5 +1,5 @@
 module.exports = function(app) {
-  app.controller('AuthController', ['sgvAuth', 'handleError',  '$location', function(auth, handleError, $location) {
+  app.controller('AuthController', ['sgvAuth', 'sgvHandleError',  '$location', function(auth, handleError, $location) {
     this.username = '';
     this.errors = [];
     this.getUsername = function() {

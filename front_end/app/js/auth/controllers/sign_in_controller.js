@@ -1,12 +1,12 @@
 var baseUrl = require('../../config').baseUrl;
 module.exports = function(app) {
-  app.controller('SignInController', ['$http', '$location', 'handleError', function($http, $location, handleError) {
+  app.controller('SignInController', ['$http', '$location', 'sgvHandleError', function($http, $location, handleError) {
     this.buttonText = 'Sign in to existing user';
     this.errors = [];
     this.authenticate = function(user) {
       $http({
         method: 'GET',
-        url: baseUrl + '/api/signin',
+        url: baseUrl + '/signin',
         headers: {
           'Authorization': 'Basic ' + window.btoa(user.username + ':' + user.password)
         }

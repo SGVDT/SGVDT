@@ -1,8 +1,8 @@
 <section>
-  <h1>{{authctrl.signup ? 'Creating A New User':'Signing in to existing user'}}</h1>
+  <h1>{{authctrl.signup ? 'Sign up':'Signing in'}}</h1>
   <form name="authform" data-ng-submit="authctrl.authenticate(authctrl.user)">
 
-    <a data-ng-href="/#/{{authctrl.signup? 'signin':'signup'}}">{{(authctrl.signup ? 'Or Sign into an exisiting user':'Or Create a New User')}}</a>
+    <a data-ng-href="/#/{{authctrl.signup ? 'signin':'signup'}}">{{(authctrl.signup ? 'Sign in':'Sign up')}}</a>
     <label for="username">Username:</label>
     <input type="text" required data-ng-model="authctrl.user.username">
 
