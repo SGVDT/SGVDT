@@ -1,7 +1,6 @@
 const gulp = require('gulp');
 const webpack = require('webpack-stream');
 
-
 gulp.task('webpack:dev', () => {
     gulp.src('app/js/entry.js')
     .pipe(webpack(require('./webpack.config.js')))
