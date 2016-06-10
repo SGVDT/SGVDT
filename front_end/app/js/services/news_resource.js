@@ -1,5 +1,5 @@
 module.exports = function(app) {
-  app.factory('newsResource', ['$http', 'handleError', function($http, handleError) {
+  app.factory('newsResource', ['$http', 'sgvHandleError', function($http, handleError) {
     var Resource = function(resourceArr, errorsArr, baseUrl, options) {
       this.data = resourceArr;
       this.url = baseUrl;
@@ -11,6 +11,7 @@ module.exports = function(app) {
     Resource.prototype.getArticles = function() {
       return $http.get('http://localhost:3000/api/news')
         .then((res) => {
+          console.log(res);
           var parsed = JSON.parse(res.data.text);
           this.data.splice(0);
           for (var i = 0; i < parsed.result.docs.length; i++) {

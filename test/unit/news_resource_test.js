@@ -17,11 +17,11 @@ describe('test the newsResource', function() {
   it('should make a GET request to /api/news to retrieve news articles from API',
     angular.mock.inject(function(newsResource) {
       $httpBackend.expectGET('http://localhost:3000/api/news').respond(200,
-      [{ article: 'someNews' }]);
+      [{ 'text': 'someNews' }] );
 
     var articlesArray = [];
     var errorsArray = [];
-    var resource = new newsResource(this.articles, this.errors, baseUrl + '/api/news',
+    var resource = new newsResource(this.articles, this.errors, 'http://localhost:3000/api/news',
       { errMessages: { getArticles: 'could not retrieve news articles' } });
 
     resource.getArticles();
