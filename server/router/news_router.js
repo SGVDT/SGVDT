@@ -14,6 +14,7 @@ newsRouter.get('/news', (req, res) => {
   process.env.WATSON_API2)
 
   .end((err, data) => {
+    console.log(data);
     if (err) return eH(err);
     trigger.emit('finished', data);
   });

@@ -11,7 +11,6 @@ module.exports = function(app) {
     Resource.prototype.getArticles = function() {
       return $http.get('http://localhost:3000/api/news')
         .then((res) => {
-          console.log(res);
           var parsed = JSON.parse(res.data.text);
           this.data.splice(0);
           for (var i = 0; i < parsed.result.docs.length; i++) {
