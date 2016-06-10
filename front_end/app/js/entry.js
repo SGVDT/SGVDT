@@ -38,6 +38,7 @@ $rp
     templateUrl: 'templates/auth/views/auth_view.html',
     controller: 'SignInController',
     controllerAs: 'authctrl'
+})
 .when('/news', {
     templateUrl: 'templates/news/views/news_view.html',
     controller: 'NewsController',
@@ -52,12 +53,3 @@ $rp
     redirectTo: '/offenses'
 });
 }]);
-
-
-// sgvdtApp.config(function(uiGmapGoogleMapApiProvider) {
-//    uiGmapGoogleMapApiProvider.configure({
-//        //    key: 'your api key',
-//        v: '3.20', // defaults to latest 3.X anyhow
-//        libraries: 'weather,geometry,visualization'
-//    });
-// });
