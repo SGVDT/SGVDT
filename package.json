@@ -2,6 +2,10 @@
   "name": "sgvdt",
   "version": "1.0.0",
   "description": "Seattle Gun Violence Data Tracker",
+  "version": "1.1.0",
+  "engines": {
+    "node": "4.3.1"
+  },
   "main": "index.js",
   "directories": {
     "test": "test"
@@ -22,10 +26,6 @@
     {
       "name": "Maria Romero",
       "email": "mariaromero18e@gmail.com"
-    },
-    {
-      "name": "Kristopher Skelton",
-      "email": "kmskelton@outlook.com"
     },
     {
       "name": "Shelly Yusuf",
