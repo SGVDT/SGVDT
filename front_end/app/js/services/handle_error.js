@@ -1,4 +1,4 @@
-module.exports = function(app) {
+module.exports = exports = function(app) {
   app.factory('sgvHandleError', function() {
     return function(errorsArr, message) {
       return function(err) {

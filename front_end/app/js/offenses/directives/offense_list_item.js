@@ -1,4 +1,4 @@
-module.exports = function(app) {
+module.exports = exports = function(app) {
   app.directive('offenseListItem', function() {
     return {
       restrict: 'EAC',
@@ -10,7 +10,6 @@ module.exports = function(app) {
         offense: '='
     },
       link: function(scope, element, attrs, controller) {
-          // take care of this at some point
         scope.remove = controller.removeMug;
       }
     };
