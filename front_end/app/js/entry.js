@@ -12,6 +12,7 @@ require('angular-ui-bootstrap'), require('angular-resource'), 'uiGmapgoogle-maps
 require('./services')(sgvdtApp);
 require('./offenses')(sgvdtApp);
 require('./maps')(sgvdtApp);
+require('./auth')(sgvdtApp);
 require('./news')(sgvdtApp);
 require('./twitter')(sgvdtApp);
 
@@ -28,6 +29,15 @@ $rp
     controller: 'MapController',
     controllerAs: 'xxctrl'
 })
+.when('/signup', {
+    templateUrl: 'templates/auth/views/auth_view.html',
+    controller: 'SignUpController',
+    controllerAs: 'authctrl'
+})
+.when('/signin', {
+    templateUrl: 'templates/auth/views/auth_view.html',
+    controller: 'SignInController',
+    controllerAs: 'authctrl'
 .when('/news', {
     templateUrl: 'templates/news/views/news_view.html',
     controller: 'NewsController',

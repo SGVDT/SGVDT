@@ -1,7 +1,5 @@
-
-
 module.exports = function(app) {
-  app.factory('handleError', function() {
+  app.factory('sgvHandleError', function() {
     return function(errorsArr, message) {
       return function(err) {
         console.log(err);
