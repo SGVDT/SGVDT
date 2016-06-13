@@ -1,3 +1,5 @@
+var port = process.env.PORT;
+
 module.exports = {
-    baseUrl: 'http://localhost:3000'
+    baseUrl: 'http://localhost:' + port
 };
