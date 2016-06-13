@@ -48,12 +48,11 @@
 	__webpack_require__(3);
 	
 	__webpack_require__(4);
+	//require(__dirname + '/news_resource_test');
 	__webpack_require__(51);
 	__webpack_require__(52);
 	__webpack_require__(53);
-	// require(__dirname + '/handle_error_service_test');
-	// require(__dirname + '/auth_controller_test');
-	// require(__dirname + '/auth_service_test');
+	__webpack_require__(54);
 
 
 /***/ },
@@ -105610,7 +105609,7 @@
 /* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = function(app) {
+	module.exports = exports = function(app) {
 	  __webpack_require__(21)(app);
 	  __webpack_require__(22)(app);
 	  __webpack_require__(23)(app);
@@ -105622,7 +105621,7 @@
 /* 21 */
 /***/ function(module, exports) {
 
-	module.exports = function(app) {
+	module.exports = exports = function(app) {
 	  app.factory('sgvHandleError', function() {
 	    return function(errorsArr, message) {
 	      return function(err) {
@@ -105644,7 +105643,6 @@
 	  app.factory('sgvdtResource', ['$http', 'sgvHandleError', function($http, handleError) {
 	    var Resource = function(resourceArr, errorsArr, baseUrl, options) {
 	      this.data = resourceArr;
-	    //   console.log(resourceArr);
 	      this.url = baseUrl;
 	      this.errors = errorsArr;
 	      this.options = options || {};
@@ -105654,19 +105652,14 @@
 	    Resource.prototype.getAll = function() {
 	      return $http.get(this.url)
 	        .then((res) => {
-	            // console.log(data);
-	            // console.log(res.data[0].summary);
 	          this.data.splice(0);
 	          for (var i = 0; i < res.data.length; i++) {
 	            this.data.push(res.data[i]);
-	        }
-	
-	        // console.log(this.data);
+	          }
 	        }, handleError(this.errors, this.options.errMessages.getAll || 'could not fetch resource'));
-	
 	    };
 	    return Resource;
-	}]);
+	  }]);
 	};
 
 
@@ -105676,22 +105669,19 @@
 
 	// var baseUrl = require('../../config').baseUrl;
 	
-	module.exports = function(app) {
-	app.factory('offenseResource', function($resource)
-	  {
+	module.exports = exports = function(app) {
+	  app.factory('offenseResource', function($resource) {
 	    var resource = $resource('http://localhost:3000/api/offenses');
 	    resource.getDataList = function() {
-	        return this.query();
+	      return this.query();
 	    };
-	
 	    resource.getData = function(year) {
-	        return this.get({
-	            year: year
-	        }
-	        );};
-	
+	      return this.get({
+	        year: year
+	      });
+	    };
 	    return resource;
-	});
+	  });
 	};
 
 
@@ -105713,9 +105703,11 @@
 	      return $http.get('http://localhost:3000/api/news')
 	        .then((res) => {
 	          var parsed = JSON.parse(res.data.text);
+	
 	          this.data.splice(0);
 	          for (var i = 0; i < parsed.result.docs.length; i++) {
 	            this.data.push(parsed.result.docs[i]);
+	
 	          }
 	          for (var j = 0; j < this.data.length; j++) {
 	            var date = this.data[j].source.enriched.url.publicationDate.date;
@@ -105725,8 +105717,8 @@
 	            var day = date.substr(6, 2);
 	            date = month + '-' + day + '-' + year;
 	            this.data[j].source.enriched.url.publicationDate.date = date;
-	            if (this.data[j].source.enriched.url.image == "http://cdn2-b.examiner.com/sites/default/files/styles/hero_curated_large/hash/2d/c5/2dc5a83e70de9c2871246c4b84bbfd41.jpg?itok=sPDSQNZ5") {
-	                this.data[j].source.enriched.url.image = "http://cdn2-b.examiner.com/sites/default/files/styles/image_content_width/hash/09/a4/09a4544d1786b6ac7d4b7b5a39442f38.JPG?itok=lKD_1hdy";
+	            if (this.data[j].source.enriched.url.image == 'http://cdn2-b.examiner.com/sites/default/files/styles/hero_curated_large/hash/2d/c5/2dc5a83e70de9c2871246c4b84bbfd41.jpg?itok=sPDSQNZ5') {
+	                this.data[j].source.enriched.url.image = 'http://cdn2-b.examiner.com/sites/default/files/styles/image_content_width/hash/09/a4/09a4544d1786b6ac7d4b7b5a39442f38.JPG?itok=lKD_1hdy';
 	            }
 	          }
 	        }, handleError(this.errors, this.options.errMessages.getAll || 'could not fetch resource'));
@@ -105740,7 +105732,7 @@
 /* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = function(app) {
+	module.exports = exports = function(app) {
 	  __webpack_require__(26)(app);
 	  __webpack_require__(28)(app);
 	};
@@ -105750,7 +105742,7 @@
 /* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = function(app) {
+	module.exports = exports = function(app) {
 	  __webpack_require__(27)(app);
 	};
 
@@ -105759,10 +105751,8 @@
 /* 27 */
 /***/ function(module, exports) {
 
-	
 	module.exports = function(app) {
-	  app.controller('OffenseController', ['$scope', 'offenseResource',
-	   function( $scope, Resource) {
+	  app.controller('OffenseController', ['$scope', 'offenseResource', function( $scope, Resource) {
 	
 	    $scope.offenseArr = [];
 	    console.log($scope.offenseArr);
@@ -105771,41 +105761,23 @@
 	    };
 	
 	    $scope.setCurrentData = function(year) {
-	
-	        Resource.getIssue({
-	            year: year
-	        }, function(data) {
-	            $scope.offenseArr = data;
-	
-	        });
+	      Resource.getIssue({
+	          year: year
+	      }, function(data) {
+	          $scope.offenseArr = data;
+	      });
 	    };
-	
 	    $scope.getDataList();
-	
 	  }]);
-	
 	};
-	
-	
-	// module.exports = function(app) {
-	//   app.controller('OffenseController', ['sgvdtResource', function(Resource) {
-	//     this.offenses = [];
-	//     this.errors = [];
-	//     var remote = new Resource(this.offenses, this.errors, baseUrl + '/api/offenses', { errMessages: { getAll: 'custome error message' } });
-	//     this.getAll = remote.getAll.bind(remote);
-	//     this.getAll();
-	//   }]);
-	// };
 
 
 /***/ },
 /* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
-	module.exports = function(app) {
+	module.exports = exports = function(app) {
 	  __webpack_require__(29)(app);
-	
 	};
 
 
@@ -105813,7 +105785,7 @@
 /* 29 */
 /***/ function(module, exports) {
 
-	module.exports = function(app) {
+	module.exports = exports = function(app) {
 	  app.directive('offenseListItem', function() {
 	    return {
 	      restrict: 'EAC',
@@ -105825,7 +105797,6 @@
 	        offense: '='
 	    },
 	      link: function(scope, element, attrs, controller) {
-	          // take care of this at some point
 	        scope.remove = controller.removeMug;
 	      }
 	    };
@@ -105837,7 +105808,7 @@
 /* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = function(app) {
+	module.exports = exports = function(app) {
 	  __webpack_require__(31)(app);
 	  __webpack_require__(34)(app);
 	};
@@ -105847,7 +105818,7 @@
 /* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = function(app) {
+	module.exports = exports = function(app) {
 	  __webpack_require__(32)(app);
 	};
 
@@ -105959,10 +105930,8 @@
 /* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
-	module.exports = function(app) {
+	module.exports = exports = function(app) {
 	  __webpack_require__(35)(app);
-	
 	};
 
 
@@ -105981,17 +105950,12 @@
 	      scope: {
 	          map: '='
 	      },
-	
 	      link: function(scope, element, attrs, controller) {
-	          // examine this at some point
 	        scope.remove = controller.removeMug;
 	      }
 	    };
 	  });
 	};
-	
-	
-	 // app.directive('uiGmapGoogleMap', function() {
 
 
 /***/ },
@@ -106261,48 +106225,6 @@
 /* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* eslint-env karma */
-	const angular = __webpack_require__(1);
-	
-	describe('test the newsResource', function() {
-	  var $httpBackend;
-	
-	  var responseText = '{ "status": "OK", "usage": "By accessing AlchemyAPI or using information generated by AlchemyAPI, you are agreeing to be bound by the AlchemyAPI Terms of Use: http://www.alchemyapi.com/company/terms.html" }'
-	
-	  beforeEach(angular.mock.module('sgvdtApp'));
-	  beforeEach(angular.mock.inject((_$httpBackend_) => {
-	    $httpBackend = _$httpBackend_;
-	  }));
-	
-	  afterEach( () => {
-	    $httpBackend.verifyNoOutstandingExpectation();
-	    $httpBackend.verifyNoOutstandingRequest();
-	  });
-	
-	  it('should make a GET request to /api/news to retrieve news articles from API',
-	    angular.mock.inject(function(newsResource) {
-	      $httpBackend.expectGET('http://localhost:3000/api/news').respond(200, responseText);
-	
-	    var articlesArray = [];
-	    var errorsArray = [];
-	    var resource = new newsResource(this.articles, this.errors, 'http://localhost:3000/api/news',
-	      { errMessages: { getArticles: 'could not retrieve news articles' } });
-	
-	    resource.getArticles();
-	    $httpBackend.flush();
-	    expect(true).toEqual(true);
-	    // expect(articlesArray.length).toBe(1);
-	    // expect(articlesArray[0].article).toBe('someNews');
-	    // expect(errorsArray.length).toBe(0);
-	
-	    }));
-	});
-
-
-/***/ },
-/* 52 */
-/***/ function(module, exports, __webpack_require__) {
-
 	const apiUrl = 'http://localhost:3000';
 	const angular = __webpack_require__(1);
 	__webpack_require__(3);
@@ -106330,35 +106252,107 @@
 
 
 /***/ },
-/* 53 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
-	const apiUrl = 'http://localhost:3000';
+	/* eslint-env karma */
 	const angular = __webpack_require__(1);
 	__webpack_require__(3);
 	
-	describe('twitter Controller', function() {
+	describe('twitter Controller', () => {
 	  var $controller;
 	
 	  beforeEach(angular.mock.module('sgvdtApp'));
-	  beforeEach(angular.mock.inject(function(_$controller_) {
+	  beforeEach(angular.mock.inject( (_$controller_) => {
 	    $controller = _$controller_;
 	  }));
 	
-	  describe('twitter api functions', function() {
+	  describe('twitter api functions', () => {
 	    var twitterctrl;
 	
-	    beforeEach(angular.mock.inject(function() {
+	    beforeEach(angular.mock.inject( () => {
 	      twitterctrl = $controller('TwitterController');
 	    }));
 	
-	    it('the spdTwitter function should call the twitter api', function() {
+	    it('the spdTwitter function should call the twitter api', () => {
 	      expect(typeof twitterctrl.spdTwitter).toEqual('function');
 	    });
-	    it('the keywordTwitter function should call the twitter api', function() {
+	    it('the keywordTwitter function should call the twitter api', () => {
 	      expect(typeof twitterctrl.keywordTwitter).toEqual('function');
-	    })
+	    });
 	  });
+	});
+
+
+/***/ },
+/* 53 */
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	var angular = __webpack_require__(1);
+	
+	describe('sgvHandleError service', function() {
+	  var sgvHandleError;
+	  beforeEach(angular.mock.module('sgvdtApp'));
+	
+	  it('should return a function', angular.mock.inject(function(sgvHandleError) {
+	    expect(typeof sgvHandleError).toBe('function');
+	  }));
+	
+	  it('should add an error to the errors array', angular.mock.inject(function(sgvHandleError) {
+	    var testArr = [];
+	    sgvHandleError(testArr, 'test message')();
+	    expect(testArr.length).toBe(1);
+	    expect(testArr[0] instanceof Error).toBe(true);
+	    expect(testArr[0].message).toBe('test message');
+	  }));
+	});
+
+
+/***/ },
+/* 54 */
+/***/ function(module, exports, __webpack_require__) {
+
+	const angular = __webpack_require__(1);
+	
+	describe('it should get the offenses', function() {
+	  var $httpBackend;
+	  var offensectrl;
+	  beforeEach(angular.mock.module('sgvdtApp'));
+	  beforeEach(angular.mock.inject((_$httpBackend_) => {
+	    $httpBackend = _$httpBackend_;
+	  }));
+	
+	  afterEach(() => {
+	    $httpBackend.verifyNoOutstandingExpectation();
+	    $httpBackend.verifyNoOutstandingRequest();
+	  });
+	
+	  it('should get the mug resources', angular.mock.inject(function(sgvdtResource) {
+	    $httpBackend.expectGET('http://localhost:3000/api/offenses').respond(200, [{ summary: 'Big Ben' }]);
+	    var resourceArray = [{}, {}, {}];
+	    var errorsArray = [];
+	    var resource = new sgvdtResource(resourceArray, errorsArray, 'http://localhost:3000/api/offenses');
+	    resource.getAll();
+	    $httpBackend.flush();
+	    expect(resourceArray.length).toBe(1);
+	    expect(resourceArray[0].summary).toBe('Big Ben');
+	  }));
+	  // /
+	  // it('should get the vinyl resources', angular.mock.inject(function(mvResource) {
+	  //   $httpBackend.expectGET('http://localhost:5000/api/vinyl').respond(200, [{ album: 'III' }]);
+	  //   var resourceArray = [{}, {}, {}];
+	  //   var errorsArray = [];
+	  //   var resource = new mvResource(resourceArray, errorsArray, 'http://localhost:5000/api/vinyl');
+	  //   resource.getAll();
+	  //   $httpBackend.flush();
+	  //   expect(resourceArray.length).toBe(1);
+	  //   expect(resourceArray[0].album).toBe('III');
+	  // }));
+	  // /
+	
+	
+	
 	});
 
 
