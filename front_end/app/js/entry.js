@@ -44,6 +44,6 @@ sgvdtApp.config(['$routeProvider', function($rp) {
     controllerAs: 'newsctrl'
   })
   .otherwise({
-      redirectTo: '/offenses'
+      redirectTo: '/map'
   });
 }]);
