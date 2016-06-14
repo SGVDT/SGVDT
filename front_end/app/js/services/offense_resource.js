@@ -1,5 +1,3 @@
-// var baseUrl = require('../../config').baseUrl;
-
 module.exports = exports = function(app) {
   app.factory('offenseResource', function($resource) {
     var resource = $resource('http://localhost:3000/api/offenses');
