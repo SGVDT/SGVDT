@@ -72046,7 +72046,7 @@
 	    this.authenticate = function(user) {
 	      $http({
 	        method: 'GET',
-	        url: baseUrl + '/signin',
+	        url: baseUrl + '/api/signin',
 	        headers: {
 	          'Authorization': 'Basic ' + window.btoa(user.username + ':' + user.password)
 	        }
