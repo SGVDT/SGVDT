@@ -1,4 +1,12 @@
-var baseUrl = process.env.PORT;
+var baseUrl = require('../config').baseUrl;
+//
+// module.exports = exports = function(app) {
+//   app.factory('offenseResource', function(resource) => {
+//     var resource = function($resource, baseUrl) {
+//       this.url = baseUrl;
+//     }
+//   })
+// }
 
 module.exports = exports = function(app) {
   app.factory('offenseResource', function($resource) {
