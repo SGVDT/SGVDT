@@ -71534,11 +71534,11 @@
 	
 	if (port === 3000) {
 	    module.exports = {
-	      baseUrl: 'sgvdtapp.herokuapp.com'
+	        baseUrl: 'localhost:' + port
 	    }
 	} else {
 	      module.exports = {
-	        baseUrl: 'localhost:' + port
+	        baseUrl: 'sgvdtapp.herokuapp.com'
 	      }
 	}
 	
