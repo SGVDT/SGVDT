@@ -11,6 +11,7 @@ module.exports = function(app) {
     Resource.prototype.getArticles = function() {
       return $http.get(this.url)
         .then((res) => {
+          console.log(res);
           var parsed = JSON.parse(res.data.text);
 
           this.data.splice(0);
