@@ -4,4 +4,3 @@ db/**/*
 test/bundle
 test/unit/bundle*
 .env
-*build
