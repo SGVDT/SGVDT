@@ -5,7 +5,7 @@ module.exports = function(app) {
     this.errors = [];
     this.buttonText = 'Create New User!'
     this.authenticate = function(user) {
-      $http.post(baseUrl + '/signup', user)
+      $http.post(baseUrl + '/api/signup', user)
         .then((res) => {
           window.localStorage.token = res.data.token;
           $location.path('/map');
