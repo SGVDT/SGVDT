@@ -71497,14 +71497,6 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var baseUrl = __webpack_require__(20).baseUrl;
-	//
-	// module.exports = exports = function(app) {
-	//   app.factory('offenseResource', function(resource) => {
-	//     var resource = function($resource, baseUrl) {
-	//       this.url = baseUrl;
-	//     }
-	//   })
-	// }
 	
 	module.exports = exports = function(app) {
 	  app.factory('offenseResource', function($resource) {
@@ -71686,7 +71678,6 @@
 	    Resource.prototype.getArticles = function() {
 	      return $http.get(this.url)
 	        .then((res) => {
-	          console.log(res);
 	          var parsed = JSON.parse(res.data.text);
 	
 	          this.data.splice(0);
@@ -71974,7 +71965,7 @@
 	          if (this.username) return resolve(this.username);
 	          if (!this.getToken()) return reject(new Error('no auth token'));
 	
-	          $http.get(baseUrl + '/api/users')
+	          $http.get(baseUrl + '/api/profile')
 	            .then((res) => {
 	              this.username = res.data.username;
 	              resolve(res.data.username);
@@ -72035,7 +72026,7 @@
 	      $http.post(baseUrl + '/signup', user)
 	        .then((res) => {
 	          window.localStorage.token = res.data.token;
-	          $location.path('/users');
+	          $location.path('/map');
 	        }, handleError(this.errors, 'Could not create user'));
 	    };
 	  }]);
@@ -72062,7 +72053,7 @@
 	      })
 	        .then((res) => {
 	          window.localStorage.token = res.data.token;
-	          $location.path('/users');
+	          $location.path('/map');
 	        }, handleError(this.errors, 'could not sign into user'));
 	    };
 	  }]);

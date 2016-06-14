@@ -8,7 +8,7 @@ module.exports = function(app) {
       $http.post(baseUrl + '/signup', user)
         .then((res) => {
           window.localStorage.token = res.data.token;
-          $location.path('/profile');
+          $location.path('/map');
         }, handleError(this.errors, 'Could not create user'));
     };
   }]);

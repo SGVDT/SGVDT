@@ -14,7 +14,7 @@ module.exports = function(app) {
       })
         .then((res) => {
           window.localStorage.token = res.data.token;
-          $location.path('/users');
+          $location.path('/map');
         }, handleError(this.errors, 'could not sign into user'));
     };
   }]);
