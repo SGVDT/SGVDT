@@ -53,8 +53,8 @@
 	__webpack_require__(12), __webpack_require__(14), 'uiGmapgoogle-maps']);
 	
 	__webpack_require__(16)(sgvdtApp);
-	__webpack_require__(21)(sgvdtApp);
-	__webpack_require__(26)(sgvdtApp);
+	__webpack_require__(22)(sgvdtApp);
+	__webpack_require__(27)(sgvdtApp);
 	__webpack_require__(33)(sgvdtApp);
 	__webpack_require__(40)(sgvdtApp);
 	__webpack_require__(45)(sgvdtApp);
@@ -71442,7 +71442,7 @@
 	  __webpack_require__(17)(app);
 	  __webpack_require__(18)(app);
 	  __webpack_require__(19)(app);
-	  __webpack_require__(20)(app);
+	  __webpack_require__(21)(app);
 	};
 
 
@@ -71494,11 +71494,13 @@
 
 /***/ },
 /* 19 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
+	/* WEBPACK VAR INJECTION */(function(process) {var baseUrl = process.env.PORT;
+	
 	module.exports = exports = function(app) {
 	  app.factory('offenseResource', function($resource) {
-	    var resource = $resource('http://localhost:3000/api/offenses');
+	    var resource = $resource(baseUrl + '/api/offenses');
 	    resource.getDataList = function() {
 	      return this.query();
 	    };
@@ -71510,251 +71512,11 @@
 	    return resource;
 	  });
 	};
-
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(20)))
 
 /***/ },
 /* 20 */
-/***/ function(module, exports) {
-
-	module.exports = function(app) {
-	  app.factory('newsResource', ['$http', 'sgvHandleError', function($http, handleError) {
-	    var Resource = function(resourceArr, errorsArr, baseUrl, options) {
-	      this.data = resourceArr;
-	      this.url = baseUrl;
-	      this.errors = errorsArr;
-	      this.options = options || {};
-	      this.options.errMessages = this.options.errMessages || {};
-	    };
-	
-	    Resource.prototype.getArticles = function() {
-	      return $http.get(this.url)
-	        .then((res) => {
-	          var parsed = JSON.parse(res.data.text);
-	
-	          this.data.splice(0);
-	          for (var i = 0; i < parsed.result.docs.length; i++) {
-	            this.data.push(parsed.result.docs[i]);
-	
-	          }
-	          for (var j = 0; j < this.data.length; j++) {
-	            var date = this.data[j].source.enriched.url.publicationDate.date;
-	            date = date.substr(0, 8);
-	            var year = date.substr(0, 4);
-	            var month = date.substr(4, 2);
-	            var day = date.substr(6, 2);
-	            date = month + '-' + day + '-' + year;
-	            this.data[j].source.enriched.url.publicationDate.date = date;
-	            if (this.data[j].source.enriched.url.image ===
-	                'http://cdn2-b.examiner.com/sites/default/files/styles/' +
-	                'hero_curated_large/hash/2d/c5/2dc5a83e70de9c2871246c4b84bbfd41.jpg?itok=sPDSQNZ5') {
-	                this.data[j].source.enriched.url.image =
-	                'http://cdn2-b.examiner.com/sites/default/files/styles/' +
-	                'image_content_width/hash/09/a4/09a4544d1786b6ac7d4b7b5a39442f38.JPG?itok=lKD_1hdy';
-	            }
-	          }
-	        }, handleError(this.errors, this.options.errMessages.getAll || 'could not fetch resource'));
-	    };
-	    return Resource;
-	  }]);
-	};
-
-
-/***/ },
-/* 21 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = exports = function(app) {
-	  __webpack_require__(22)(app);
-	  __webpack_require__(24)(app);
-	};
-
-
-/***/ },
-/* 22 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = exports = function(app) {
-	  __webpack_require__(23)(app);
-	};
-
-
-/***/ },
-/* 23 */
-/***/ function(module, exports) {
-
-	module.exports = function(app) {
-	  app.controller('OffenseController', ['$scope', 'offenseResource', function( $scope, Resource) {
-	
-	    $scope.offenseArr = [];
-	    console.log($scope.offenseArr);
-	    $scope.getDataList = function() {
-	    $scope.offenseArr = Resource.getDataList();
-	    };
-	
-	    $scope.setCurrentData = function(year) {
-	      Resource.getIssue({
-	          year: year
-	      }, (data) => {
-	          $scope.offenseArr = data;
-	      });
-	    };
-	    $scope.getDataList();
-	  }]);
-	};
-
-
-/***/ },
-/* 24 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = exports = function(app) {
-	  __webpack_require__(25)(app);
-	};
-
-
-/***/ },
-/* 25 */
-/***/ function(module, exports) {
-
-	module.exports = exports = function(app) {
-	  app.directive('offenseListItem', function() {
-	    return {
-	      restrict: 'EAC',
-	      replace: true,
-	      require: '^ngController',
-	      transclude: true,
-	      templateUrl: '/templates/offenses/directives/offense_list_item.html',
-	      scope: {
-	        offense: '='
-	    },
-	      link: function(scope, element, attrs, controller) {
-	        scope.remove = controller.removeMug;
-	      }
-	    };
-	  });
-	};
-
-
-/***/ },
-/* 26 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = exports = function(app) {
-	  __webpack_require__(27)(app);
-	  __webpack_require__(31)(app);
-	};
-
-
-/***/ },
-/* 27 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = exports = function(app) {
-	  __webpack_require__(28)(app);
-	};
-
-
-/***/ },
-/* 28 */
-/***/ function(module, exports, __webpack_require__) {
-
-	__webpack_require__(1);
-	__webpack_require__(3);
-	__webpack_require__(8);
-	
-	var baseUrl = __webpack_require__(29).baseUrl;
-	
-	module.exports = function(app) {
-	  app.controller('MapController', ['sgvdtResource', '$http', '$scope', function( Resource, $http, $scope) {
-	
-	      $scope.map = {
-	          center: {
-	           latitude: 47.618217, longitude: -122.351832
-	       },
-	       zoom: 12,
-	   bounds: {} };
-	
-	    $scope.options = {
-	         scrollwheel: false
-	     };
-	
-	
-	var latitude = [];
-	var longitude = [];
-	var summary = [];
-	var date = [];
-	
-	 var createMarker = function(i, bounds, idKey) {
-	/* eslint-disable no-eq-null*/
-	/* eslint-disable eqeqeq*/
-	    if (idKey == null) {
-	        idKey = 'id';
-	        }
-	    var ret = {
-	                 latitude: latitude[i],
-	                 longitude: longitude[i],
-	                 summary: summary[i],
-	                 date: date[i],
-	                 title: 'm' + i,
-	                 show: false
-	             };
-	
-	        ret[idKey] = i;
-	         return ret;
-	     };
-	
-	     $scope.onClick = function(marker, eventName, model) {
-	        model.show = !model.show;
-	    };
-	
-	$scope.randomMarkers = [];
-	
-	     $scope.$watch(
-	         () => {
-	         return $scope.map.bounds;
-	     }, (nv, ov) => {
-	         if (!ov.southwest && nv.southwest) {
-	             var markers = [];
-	                 $http.get(baseUrl + '/api/offenses')
-	                 .then((res) => {
-	                    for (var i = 0; i <= res.data.length; i++) {
-	                 latitude.push(res.data[i].latitude);
-	                 longitude.push(res.data[i].longitude);
-	                 summary.push(res.data[i].summary);
-	                 date.push(res.data[i].date);
-	                 markers.push(createMarker(i, $scope.map.bounds));
-	             }
-	                 });
-	
-	             $scope.randomMarkers = markers;
-	
-	         }
-	     }, true);
-	
-	  }]);
-	};
-
-
-/***/ },
-/* 29 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {var port = process.env.PORT;
-	
-	if (port === 3000) {
-	    module.exports = {
-	      baseUrl: 'sgvdtapp.herokuapp.com'
-	    }
-	} else {
-	      module.exports = {
-	        baseUrl: 'localhost:' + port
-	      }
-	}
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(30)))
-
-/***/ },
-/* 30 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -71879,6 +71641,247 @@
 
 
 /***/ },
+/* 21 */
+/***/ function(module, exports) {
+
+	module.exports = function(app) {
+	  app.factory('newsResource', ['$http', 'sgvHandleError', function($http, handleError) {
+	    var Resource = function(resourceArr, errorsArr, baseUrl, options) {
+	      this.data = resourceArr;
+	      this.url = baseUrl;
+	      this.errors = errorsArr;
+	      this.options = options || {};
+	      this.options.errMessages = this.options.errMessages || {};
+	    };
+	
+	    Resource.prototype.getArticles = function() {
+	      return $http.get(this.url)
+	        .then((res) => {
+	          var parsed = JSON.parse(res.data.text);
+	
+	          this.data.splice(0);
+	          for (var i = 0; i < parsed.result.docs.length; i++) {
+	            this.data.push(parsed.result.docs[i]);
+	
+	          }
+	          for (var j = 0; j < this.data.length; j++) {
+	            var date = this.data[j].source.enriched.url.publicationDate.date;
+	            date = date.substr(0, 8);
+	            var year = date.substr(0, 4);
+	            var month = date.substr(4, 2);
+	            var day = date.substr(6, 2);
+	            date = month + '-' + day + '-' + year;
+	            this.data[j].source.enriched.url.publicationDate.date = date;
+	            if (this.data[j].source.enriched.url.image ===
+	                'http://cdn2-b.examiner.com/sites/default/files/styles/' +
+	                'hero_curated_large/hash/2d/c5/2dc5a83e70de9c2871246c4b84bbfd41.jpg?itok=sPDSQNZ5') {
+	                this.data[j].source.enriched.url.image =
+	                'http://cdn2-b.examiner.com/sites/default/files/styles/' +
+	                'image_content_width/hash/09/a4/09a4544d1786b6ac7d4b7b5a39442f38.JPG?itok=lKD_1hdy';
+	            }
+	          }
+	        }, handleError(this.errors, this.options.errMessages.getAll || 'could not fetch resource'));
+	    };
+	    return Resource;
+	  }]);
+	};
+
+
+/***/ },
+/* 22 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = exports = function(app) {
+	  __webpack_require__(23)(app);
+	  __webpack_require__(25)(app);
+	};
+
+
+/***/ },
+/* 23 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = exports = function(app) {
+	  __webpack_require__(24)(app);
+	};
+
+
+/***/ },
+/* 24 */
+/***/ function(module, exports) {
+
+	module.exports = function(app) {
+	  app.controller('OffenseController', ['$scope', 'offenseResource', function( $scope, Resource) {
+	
+	    $scope.offenseArr = [];
+	    console.log($scope.offenseArr);
+	    $scope.getDataList = function() {
+	    $scope.offenseArr = Resource.getDataList();
+	    };
+	
+	    $scope.setCurrentData = function(year) {
+	      Resource.getIssue({
+	          year: year
+	      }, (data) => {
+	          $scope.offenseArr = data;
+	      });
+	    };
+	    $scope.getDataList();
+	  }]);
+	};
+
+
+/***/ },
+/* 25 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = exports = function(app) {
+	  __webpack_require__(26)(app);
+	};
+
+
+/***/ },
+/* 26 */
+/***/ function(module, exports) {
+
+	module.exports = exports = function(app) {
+	  app.directive('offenseListItem', function() {
+	    return {
+	      restrict: 'EAC',
+	      replace: true,
+	      require: '^ngController',
+	      transclude: true,
+	      templateUrl: '/templates/offenses/directives/offense_list_item.html',
+	      scope: {
+	        offense: '='
+	    },
+	      link: function(scope, element, attrs, controller) {
+	        scope.remove = controller.removeMug;
+	      }
+	    };
+	  });
+	};
+
+
+/***/ },
+/* 27 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = exports = function(app) {
+	  __webpack_require__(28)(app);
+	  __webpack_require__(31)(app);
+	};
+
+
+/***/ },
+/* 28 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = exports = function(app) {
+	  __webpack_require__(29)(app);
+	};
+
+
+/***/ },
+/* 29 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(1);
+	__webpack_require__(3);
+	__webpack_require__(8);
+	
+	var baseUrl = __webpack_require__(30).baseUrl;
+	
+	module.exports = function(app) {
+	  app.controller('MapController', ['sgvdtResource', '$http', '$scope', function( Resource, $http, $scope) {
+	
+	      $scope.map = {
+	          center: {
+	           latitude: 47.618217, longitude: -122.351832
+	       },
+	       zoom: 12,
+	   bounds: {} };
+	
+	    $scope.options = {
+	         scrollwheel: false
+	     };
+	
+	
+	var latitude = [];
+	var longitude = [];
+	var summary = [];
+	var date = [];
+	
+	 var createMarker = function(i, bounds, idKey) {
+	/* eslint-disable no-eq-null*/
+	/* eslint-disable eqeqeq*/
+	    if (idKey == null) {
+	        idKey = 'id';
+	        }
+	    var ret = {
+	                 latitude: latitude[i],
+	                 longitude: longitude[i],
+	                 summary: summary[i],
+	                 date: date[i],
+	                 title: 'm' + i,
+	                 show: false
+	             };
+	
+	        ret[idKey] = i;
+	         return ret;
+	     };
+	
+	     $scope.onClick = function(marker, eventName, model) {
+	        model.show = !model.show;
+	    };
+	
+	$scope.randomMarkers = [];
+	
+	     $scope.$watch(
+	         () => {
+	         return $scope.map.bounds;
+	     }, (nv, ov) => {
+	         if (!ov.southwest && nv.southwest) {
+	             var markers = [];
+	                 $http.get(baseUrl + '/api/offenses')
+	                 .then((res) => {
+	                    for (var i = 0; i <= res.data.length; i++) {
+	                 latitude.push(res.data[i].latitude);
+	                 longitude.push(res.data[i].longitude);
+	                 summary.push(res.data[i].summary);
+	                 date.push(res.data[i].date);
+	                 markers.push(createMarker(i, $scope.map.bounds));
+	             }
+	                 });
+	
+	             $scope.randomMarkers = markers;
+	
+	         }
+	     }, true);
+	
+	  }]);
+	};
+
+
+/***/ },
+/* 30 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {var port = process.env.PORT;
+	
+	if (port === 3000) {
+	    module.exports = {
+	      baseUrl: 'sgvdtapp.herokuapp.com'
+	    }
+	} else {
+	      module.exports = {
+	        baseUrl: 'localhost:' + port
+	      }
+	}
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(20)))
+
+/***/ },
 /* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -71933,7 +71936,7 @@
 /* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseUrl = __webpack_require__(29).baseUrl;
+	var baseUrl = __webpack_require__(30).baseUrl;
 	
 	module.exports = function(app) {
 	  app.factory('sgvAuth', ['$http', '$q', function($http, $q) {
@@ -72010,7 +72013,7 @@
 /* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseUrl = __webpack_require__(29).baseUrl;
+	var baseUrl = __webpack_require__(30).baseUrl;
 	module.exports = function(app) {
 	  app.controller('SignUpController', ['$http', '$location',  'sgvHandleError', function($http, $location, handleError) {
 	    this.signup = true;
@@ -72031,7 +72034,7 @@
 /* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseUrl = __webpack_require__(29).baseUrl;
+	var baseUrl = __webpack_require__(30).baseUrl;
 	
 	module.exports = function(app) {
 	  app.controller('SignInController', ['$http', '$location', 'sgvHandleError', function($http, $location, handleError) {
@@ -72077,7 +72080,7 @@
 /* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
-	const baseUrl = __webpack_require__(29);
+	const baseUrl = __webpack_require__(30);
 	
 	module.exports = exports = function(app) {
 	  app.controller('NewsController', ['newsResource', function(Resource) {
