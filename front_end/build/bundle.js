@@ -71496,8 +71496,6 @@
 /* 19 */
 /***/ function(module, exports) {
 
-	// var baseUrl = require('../../config').baseUrl;
-	
 	module.exports = exports = function(app) {
 	  app.factory('offenseResource', function($resource) {
 	    var resource = $resource('http://localhost:3000/api/offenses');
@@ -71529,7 +71527,7 @@
 	    };
 	
 	    Resource.prototype.getArticles = function() {
-	      return $http.get('http://localhost:3000/api/news')
+	      return $http.get(this.url)
 	        .then((res) => {
 	          var parsed = JSON.parse(res.data.text);
 	
@@ -71743,9 +71741,15 @@
 
 	/* WEBPACK VAR INJECTION */(function(process) {var port = process.env.PORT;
 	
-	module.exports = {
-	    baseUrl: 'http://localhost:' + port
-	};
+	if (port === 3000) {
+	    module.exports = {
+	      baseUrl: 'sgvdtapp.herokuapp.com'
+	    }
+	} else {
+	      module.exports = {
+	        baseUrl: 'localhost:' + port
+	      }
+	}
 	
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(30)))
 
