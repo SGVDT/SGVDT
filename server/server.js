@@ -17,9 +17,9 @@ app.use(express.static(__dirname + '/../front_end/build'))
 .get('*', (req, res) => {
   res.redirect('/#' + req.url);
 });
-app.use('/*', (req, res) => {
-  res.status(404).send('not found');
-});
+// app.use('/*', (req, res) => {
+//   res.status(404).send('not found');
+// });
 
 app.use( (req, res, next) => {
 res.header('Access-Control-Allow-Origin', '*');
