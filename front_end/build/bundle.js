@@ -71526,7 +71526,11 @@
 /* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(process) {var port = process.env.PORT;
+	/* WEBPACK VAR INJECTION */(function(process) {// module.exports = {
+	//   baseUrl = ''
+	// };
+	
+	var port = process.env.PORT;
 	
 	if (port === 3000) {
 	    module.exports = {
