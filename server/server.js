@@ -18,11 +18,11 @@ app.use(express.static(__dirname + '/../front_end/build'))
   res.redirect('/#' + req.url);
 });
 
-// app.use('/*', (req, res) => {
-//   res.status(404).send('not found');
-// });
+app.use('/*', (req, res) => {
+  res.status(404).send('not found');
+});
 
-app.use( (req, res, next) => {
+app.use((req, res, next) => {
 res.header('Access-Control-Allow-Origin', '*');
 res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, token');
 res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
