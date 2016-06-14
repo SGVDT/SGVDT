@@ -1,6 +1,5 @@
 **/*node_modules
 data/**/*
 db/**/*
-build
 test/unit/bundle*
 .env
