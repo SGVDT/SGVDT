@@ -7,14 +7,14 @@ module.exports = function(app) {
     this.authenticate = function(user) {
       $http({
         method: 'GET',
-        url: baseUrl + '/signin',
+        url: baseUrl + '/api/signin',
         headers: {
           'Authorization': 'Basic ' + window.btoa(user.username + ':' + user.password)
         }
       })
         .then((res) => {
           window.localStorage.token = res.data.token;
-          $location.path('/users');
+          $location.path('/map');
         }, handleError(this.errors, 'could not sign into user'));
     };
   }]);

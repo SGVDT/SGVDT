@@ -9,7 +9,7 @@ module.exports = function(app) {
     };
 
     Resource.prototype.getArticles = function() {
-      return $http.get('http://localhost:3000/api/news')
+      return $http.get(this.url)
         .then((res) => {
           var parsed = JSON.parse(res.data.text);
 

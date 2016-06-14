@@ -24,7 +24,7 @@ module.exports = function(app) {
           if (this.username) return resolve(this.username);
           if (!this.getToken()) return reject(new Error('no auth token'));
 
-          $http.get(baseUrl + '/api/users')
+          $http.get(baseUrl + '/api/profile')
             .then((res) => {
               this.username = res.data.username;
               resolve(res.data.username);
