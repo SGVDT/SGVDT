@@ -10,6 +10,6 @@ if (port === 3000) {
     }
 } else {
       module.exports = {
-        baseUrl: 'sgvdtapp.herokuapp.com'
+        baseUrl: ''
       }
 }
