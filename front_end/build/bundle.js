@@ -53,8 +53,8 @@
 	__webpack_require__(12), __webpack_require__(14), 'uiGmapgoogle-maps']);
 	
 	__webpack_require__(16)(sgvdtApp);
-	__webpack_require__(22)(sgvdtApp);
-	__webpack_require__(27)(sgvdtApp);
+	__webpack_require__(23)(sgvdtApp);
+	__webpack_require__(28)(sgvdtApp);
 	__webpack_require__(33)(sgvdtApp);
 	__webpack_require__(40)(sgvdtApp);
 	__webpack_require__(45)(sgvdtApp);
@@ -71442,7 +71442,7 @@
 	  __webpack_require__(17)(app);
 	  __webpack_require__(18)(app);
 	  __webpack_require__(19)(app);
-	  __webpack_require__(21)(app);
+	  __webpack_require__(22)(app);
 	};
 
 
@@ -71496,7 +71496,15 @@
 /* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(process) {var baseUrl = process.env.PORT;
+	var baseUrl = __webpack_require__(20).baseUrl;
+	//
+	// module.exports = exports = function(app) {
+	//   app.factory('offenseResource', function(resource) => {
+	//     var resource = function($resource, baseUrl) {
+	//       this.url = baseUrl;
+	//     }
+	//   })
+	// }
 	
 	module.exports = exports = function(app) {
 	  app.factory('offenseResource', function($resource) {
@@ -71512,11 +71520,28 @@
 	    return resource;
 	  });
 	};
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(20)))
+
 
 /***/ },
 /* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {var port = process.env.PORT;
+	
+	if (port === 3000) {
+	    module.exports = {
+	      baseUrl: 'sgvdtapp.herokuapp.com'
+	    }
+	} else {
+	      module.exports = {
+	        baseUrl: 'localhost:' + port
+	      }
+	}
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(21)))
+
+/***/ },
+/* 21 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -71641,7 +71666,7 @@
 
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports) {
 
 	module.exports = function(app) {
@@ -71688,26 +71713,26 @@
 
 
 /***/ },
-/* 22 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = exports = function(app) {
-	  __webpack_require__(23)(app);
-	  __webpack_require__(25)(app);
-	};
-
-
-/***/ },
 /* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = exports = function(app) {
 	  __webpack_require__(24)(app);
+	  __webpack_require__(26)(app);
 	};
 
 
 /***/ },
 /* 24 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = exports = function(app) {
+	  __webpack_require__(25)(app);
+	};
+
+
+/***/ },
+/* 25 */
 /***/ function(module, exports) {
 
 	module.exports = function(app) {
@@ -71732,16 +71757,16 @@
 
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = exports = function(app) {
-	  __webpack_require__(26)(app);
+	  __webpack_require__(27)(app);
 	};
 
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports) {
 
 	module.exports = exports = function(app) {
@@ -71764,21 +71789,12 @@
 
 
 /***/ },
-/* 27 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = exports = function(app) {
-	  __webpack_require__(28)(app);
-	  __webpack_require__(31)(app);
-	};
-
-
-/***/ },
 /* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = exports = function(app) {
 	  __webpack_require__(29)(app);
+	  __webpack_require__(31)(app);
 	};
 
 
@@ -71786,11 +71802,20 @@
 /* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
+	module.exports = exports = function(app) {
+	  __webpack_require__(30)(app);
+	};
+
+
+/***/ },
+/* 30 */
+/***/ function(module, exports, __webpack_require__) {
+
 	__webpack_require__(1);
 	__webpack_require__(3);
 	__webpack_require__(8);
 	
-	var baseUrl = __webpack_require__(30).baseUrl;
+	var baseUrl = __webpack_require__(20).baseUrl;
 	
 	module.exports = function(app) {
 	  app.controller('MapController', ['sgvdtResource', '$http', '$scope', function( Resource, $http, $scope) {
@@ -71864,24 +71889,6 @@
 
 
 /***/ },
-/* 30 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {var port = process.env.PORT;
-	
-	if (port === 3000) {
-	    module.exports = {
-	      baseUrl: 'sgvdtapp.herokuapp.com'
-	    }
-	} else {
-	      module.exports = {
-	        baseUrl: 'localhost:' + port
-	      }
-	}
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(20)))
-
-/***/ },
 /* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -71936,7 +71943,7 @@
 /* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseUrl = __webpack_require__(30).baseUrl;
+	var baseUrl = __webpack_require__(20).baseUrl;
 	
 	module.exports = function(app) {
 	  app.factory('sgvAuth', ['$http', '$q', function($http, $q) {
@@ -72013,7 +72020,7 @@
 /* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseUrl = __webpack_require__(30).baseUrl;
+	var baseUrl = __webpack_require__(20).baseUrl;
 	module.exports = function(app) {
 	  app.controller('SignUpController', ['$http', '$location',  'sgvHandleError', function($http, $location, handleError) {
 	    this.signup = true;
@@ -72034,7 +72041,7 @@
 /* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseUrl = __webpack_require__(30).baseUrl;
+	var baseUrl = __webpack_require__(20).baseUrl;
 	
 	module.exports = function(app) {
 	  app.controller('SignInController', ['$http', '$location', 'sgvHandleError', function($http, $location, handleError) {
@@ -72080,7 +72087,7 @@
 /* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
-	const baseUrl = __webpack_require__(30);
+	const baseUrl = __webpack_require__(20);
 	
 	module.exports = exports = function(app) {
 	  app.controller('NewsController', ['newsResource', function(Resource) {
