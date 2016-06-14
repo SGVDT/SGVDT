@@ -72091,7 +72091,7 @@
 /* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
-	const baseUrl = __webpack_require__(20);
+	const baseUrl = __webpack_require__(20).baseUrl;
 	
 	module.exports = exports = function(app) {
 	  app.controller('NewsController', ['newsResource', function(Resource) {

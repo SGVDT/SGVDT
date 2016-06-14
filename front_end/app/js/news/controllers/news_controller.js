@@ -1,4 +1,4 @@
-const baseUrl = require(__dirname + '/../../config');
+const baseUrl = require(__dirname + '/../../config').baseUrl;
 
 module.exports = exports = function(app) {
   app.controller('NewsController', ['newsResource', function(Resource) {
