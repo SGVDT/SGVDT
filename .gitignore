@@ -3,4 +3,3 @@ data/**/*
 db/**/*
 test/unit/bundle*
 .env
-*build 

@@ -2,8 +2,8 @@ var port = process.env.PORT;
 
 module.exports = {
   if (port === 3000) {
-    baseUrl: 'sgvdtapp.herokuapp.com'
+    baseUrl: 'localhost:' + port    
   } else {
-    baseUrl: 'localhost:' + port
+    baseUrl: 'sgvdtapp.herokuapp.com'
   }
 };
