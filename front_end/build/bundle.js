@@ -71538,7 +71538,7 @@
 	    }
 	} else {
 	      module.exports = {
-	        baseUrl: 'sgvdtapp.herokuapp.com'
+	        baseUrl: ''
 	      }
 	}
 	
