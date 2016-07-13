@@ -3,13 +3,12 @@
 A [Code Fellows](https://www.codefellows.org/) project by [Heidi Laursen](https://github.com/pnwlady/SGVDT) [Maria Romero](https://github.com/MiaRomero/SGVDT) [Kristopher Skelton](https://github.com/KMSkelton/SGVDT) [Shelly Yusuf](https://github.com/CWShelly/SGVDT)
 
 ### Purpose
-This tool is designed to allow for granular searching of gun violence data from the data.seattle.gov database.
+This site collects information pertaining to gun violence in Seattle. The site's main feature, incident data, displays by geolocation; surrounded by recent tweets and news pertaining to gun related events in Seattle.
 
 ### Methods
-Our service has automated data gathering. Upon deployment to Heroku our service queried the data.seattle.gov API to seed our database with incidents. Every 24hours the data tracker sends a request to the data.seattle.gov database, requests data then adds the new incidents to our database.
+Our service has automated data gathering. Our site queries  data.seattle.gov API to seed our database with incidents. Every 24hours the data tracker sends a request to the data.seattle.gov database, requests data then adds the new incidents to our database.
 
-In its nascent form, users can create the simplest of accounts with a username, email address and password. Future versions will allow users to search the database by specifying their ZIP code (or Lat/Lon coordinates) and radius for data gathering, plus the date range in which they are interested.
-
+The news feed populates through the IBM Watson API, scrubbing news from the internet and recent tweets from the Twitter API widget.
 
 ### Use
 Our site is live on `https://sgvdtapp.herokuapp.com` with routes for `/Map` and `/Data`.
